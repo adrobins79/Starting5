@@ -66,9 +66,9 @@ public class GetScheduleTask extends AsyncTask<Void, Void, String>{
         super.onPostExecute(todayUtc);
         TextView scheduleDate = (TextView)activity.findViewById(R.id.scheduleDate);
         Calendar utcCal= Calendar.getInstance();
-        utcCal.setTimeInMillis(Integer.valueOf(todayUtc));
+        utcCal.setTimeInMillis(Long.valueOf(todayUtc));
 
-        SimpleDateFormat sdf= new SimpleDateFormat("MM dd yyyy");
+        SimpleDateFormat sdf= new SimpleDateFormat("EEE, MMM dd yyyy");
         Date utcDate= utcCal.getTime();
         String formattedDate = sdf.format(utcDate);
 
