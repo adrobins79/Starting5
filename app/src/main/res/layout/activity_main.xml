@@ -9,19 +9,22 @@
         android:orientation="horizontal"
         android:gravity="center">
 
+
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Previous"
-            android:id="@+id/previousDate" />
+            android:id="@+id/previousDate"
+            android:layout_gravity="left" />
 
         <TextView
-            android:layout_width="130dp"
-            android:layout_height="33dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text=""
             android:id="@+id/scheduleDate"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="center"
             android:autoText="true"
             android:editable="false"
             />
@@ -29,8 +32,10 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Next Date"
-            android:id="@+id/button" />
+            android:text="Next"
+            android:id="@+id/nextDate"
+            android:layout_gravity="right" />
+
     </LinearLayout>
 
     <LinearLayout

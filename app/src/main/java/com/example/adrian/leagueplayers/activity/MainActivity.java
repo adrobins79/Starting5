@@ -1,35 +1,16 @@
 package com.example.adrian.leagueplayers.activity;
 
 import android.app.ListActivity;
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListAdapter;
-import android.widget.SimpleAdapter;
 
 import com.example.adrian.leagueplayers.R;
-import com.example.adrian.leagueplayers.service.HttpService;
-import com.example.adrian.leagueplayers.service.ServiceException;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 
 
 public class MainActivity extends ListActivity {
-    private ProgressDialog pDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +18,7 @@ public class MainActivity extends ListActivity {
         setContentView(R.layout.activity_main);
 
 
-        new GetPlayersTask(this).execute(); //execute get players
+        //new GetPlayersTask(this).execute(); //execute get players
         new GetScheduleTask(this).execute();
     }
 

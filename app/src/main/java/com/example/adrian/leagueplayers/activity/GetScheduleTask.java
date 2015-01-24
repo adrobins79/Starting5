@@ -21,9 +21,9 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Date;
 
 /**
  * Async task class to get json by making HTTP call
@@ -54,7 +54,7 @@ public class GetScheduleTask extends AsyncTask<Void, Void, ArrayList<Map<String,
             JSONObject today = payload.getJSONObject("today");
             JSONArray games = today.getJSONArray("games");
             todayUtc = today.getString("utcMillis");
-            TextView scheduleDate = (TextView)activity.findViewById(R.id.scheduleDate);
+
             Calendar utcCal= Calendar.getInstance();
             utcCal.setTimeInMillis(Long.valueOf(todayUtc));
 
@@ -62,7 +62,7 @@ public class GetScheduleTask extends AsyncTask<Void, Void, ArrayList<Map<String,
             Date utcDate= utcCal.getTime();
             String formattedDate = sdf.format(utcDate);
 
-            scheduleDate.setText(formattedDate);
+
             for(int i=0; i < games.length(); i++){
                 JSONObject homeTeam = games.getJSONObject(i).getJSONObject("homeTeam");
                 JSONObject homeProfile = homeTeam.getJSONObject("profile");
@@ -72,8 +72,13 @@ public class GetScheduleTask extends AsyncTask<Void, Void, ArrayList<Map<String,
 
                 HashMap<String, String> map = new HashMap<String, String>();
                 map.put("date", formattedDate);
-                map.put("homeTeamName", homeProfile.getString("city") + " " + homeProfile.getString("name"));
-                map.put("awayTeamName", awayProfile.getString("city") + " " + awayProfile.getString("name"));
+
+
+                String homeTeamName = homeProfile.getString("city") + " " + homeProfile.getString("name");
+                String awayTeamName = awayProfile.getString("city") + " " + awayProfile.getString("name");
+                map.put("homeTeamName", homeTeamName);
+                map.put("awayTeamName", awayTeamName);
+                map.put("matchup", awayTeamName + " @ " + homeTeamName);
                 dataList.add(map);
             }
 
@@ -88,14 +93,16 @@ public class GetScheduleTask extends AsyncTask<Void, Void, ArrayList<Map<String,
     @Override
     protected void onPostExecute(ArrayList<Map<String, String>> dataList) {
         super.onPostExecute(dataList);
-        /**
-         * Updating parsed JSON data into ListView
-         * */
+
+        TextView scheduleDate = (TextView)activity.findViewById(R.id.scheduleDate);
+        if(dataList.size() > 0) {
+            scheduleDate.setText(dataList.get(0).get("date"));
+        }
         ListAdapter adapter = new SimpleAdapter(
                 activity,
                 dataList,
                 R.layout.list_item,
-                new String[] {"homeTeamName"},
+                new String[] {"matchup"},
                 new int[] { R.id.name});
 
         activity.setListAdapter(adapter);
