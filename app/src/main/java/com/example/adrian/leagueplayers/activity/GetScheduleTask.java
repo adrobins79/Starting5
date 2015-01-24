@@ -30,7 +30,7 @@ import java.util.Map;
  * */
 public class GetScheduleTask extends AsyncTask<Void, Void, ArrayList<Map<String, String>>>{
     private ListActivity activity;
-    private String url = "http://23.62.236.122/statsm2/scores/miniscoreboard.json";
+    private String url = "http://mi.nba.com/statsm2/scores/miniscoreboard.json";
     public GetScheduleTask(ListActivity activity){
         this.activity = activity;
     }
